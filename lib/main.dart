@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'log_in.dart';
+import 'screens/home_page/log_in.dart';
 
 void main() {
   runApp(const BudgetBeeApp());
