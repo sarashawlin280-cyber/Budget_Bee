@@ -1,6 +1,5 @@
-/*
 import 'package:flutter/material.dart';
-import 'tracking_page.dart'; // Import the second file
+import 'log_in.dart';
 
 void main() {
   runApp(const BudgetBeeApp());
@@ -13,36 +12,12 @@ class BudgetBeeApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'BudgetBee Tracker',
+      title: 'BudgetBee',
       theme: ThemeData(
-        brightness: Brightness.dark,
-        scaffoldBackgroundColor: Colors.black,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.orange),
+        useMaterial3: true, // Enhances user experience [cite: 49]
       ),
-      // This tells the app to load the TrackingPage from the other file
-      home: const TrackingPage(),
+      home: const LoginPage(),
     );
   }
 }
-*/
-import 'package:flutter/material.dart';
-import 'screens/home_page/debt_page.dart';
-
-void main() => runApp(const BudgetBee());
-
-class BudgetBee extends StatelessWidget {
-  const BudgetBee({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        brightness: Brightness.dark,
-        scaffoldBackgroundColor: Colors.black,
-      ),
-      home: const DebtPage(),
-    );
-  }
-}
-
-
