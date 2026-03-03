@@ -13,9 +13,16 @@ class BudgetBeeApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'BudgetBee',
+      // Standardizing the dark theme across the app
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.orange),
-        useMaterial3: true, // Enhances user experience [cite: 49]
+        brightness: Brightness.dark,
+        primarySwatch: Colors.orange,
+        scaffoldBackgroundColor: Colors.black,
+        colorScheme: const ColorScheme.dark(
+          primary: Colors.orangeAccent,
+          secondary: Colors.amber,
+        ),
+        useMaterial3: true,
       ),
       home: const LoginPage(),
     );
