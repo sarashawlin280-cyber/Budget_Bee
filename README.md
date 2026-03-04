@@ -1,172 +1,110 @@
-# \# Budget Bee 🐝
+# 🐝 Budget Bee  
+### *Take control. Crush debt. Grow your hive.*
 
-# 
+![Flutter](https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white)
+![Dart](https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white)
+![Platform](https://img.shields.io/badge/iOS-Android-black?style=for-the-badge)
+![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
-# !\[Flutter](https://img.shields.io/badge/Flutter-%2302569B.svg?style=for-the-badge\&logo=Flutter\&logoColor=white)
+---
 
-# !\[Dart](https://img.shields.io/badge/dart-%230175C2.svg?style=for-the-badge\&logo=dart\&logoColor=white)
+## 🧠 What is Budget Bee?
 
-# !\[License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)
+**Budget Bee** is a modern, dark-mode personal finance tracker built with Flutter.  
+It helps you:
 
-# 
+- ✅ Track daily expenses  
+- ✅ Monitor and eliminate debt  
+- ✅ Visualize financial progress  
+- ✅ Build better money habits  
 
-# \*\*Budget Bee\*\* is a sleek, dark-themed personal finance tracker built with Flutter. Designed to help you organize your finances with the precision of a worker bee, it focuses on expense tracking and aggressive debt payoff visualization.
+Designed with a sleek AMOLED-first interface — because your finances deserve clarity.
 
-# 
+---
 
-# ---
+## 🌙 Why Budget Bee?
 
-# 
+Managing money shouldn’t feel overwhelming.
 
-# \## 📱 Screenshots
+Budget Bee focuses on:
 
-# 
+- Simplicity  
+- Speed  
+- Clean UI  
+- Clear insights  
 
-# <!-- TIP: Take screenshots of your app, put them in a folder named 'assets' and link them here. -->
+No bloated features. No distractions. Just control.
 
-# <!-- If you don't have screenshots yet, delete this table or leave it as a placeholder. -->
+---
 
-# 
+## ✨ Core Features
 
-# | Home Screen | Debt Tracker | Expense Log |
+### 🖤 Pure Dark UI
+Battery-friendly, OLED-optimized dark theme.
 
-# |:---:|:---:|:---:|
+### 💳 Expense Tracking
+Log, categorize, and review spending quickly.
 
-# | <img src="assets/screenshot\_1.png" width="200"/> | <img src="assets/screenshot\_2.png" width="200"/> | <img src="assets/screenshot\_3.png" width="200"/> |
+### 📉 Debt Payoff Tracking
+Supports:
+- Snowball Method
+- Avalanche Method  
 
-# 
+Track balances, payments, and payoff progress.
 
-# ---
+### 📊 Visual Insights *(Coming Soon)*
+- Spending breakdown charts  
+- Debt progress graphs  
+- Monthly summaries  
 
-# 
+### 📱 Cross-Platform
+Runs smoothly on:
+- Android  
+- iOS  
 
-# \## ✨ Features
+---
 
-# 
+## 📸 Screenshots
 
-# \- \*\*🌑 OLED Dark Mode:\*\* A sleek, pure black UI designed to save battery and reduce eye strain.
+| Dashboard | Debt Overview | Expense Entry |
+|-----------|---------------|---------------|
+| <img src="assets/screenshot_1.png" width="220"/> | <img src="assets/screenshot_2.png" width="220"/> | <img src="assets/screenshot_3.png" width="220"/> |
 
-# \- \*\*📉 Debt Snowball/Avalanche:\*\* specialized tools to track and visualize debt payoff progress.
+> Replace images in the `assets/` folder with your actual screenshots.
 
-# \- \*\*💰 Expense Tracking:\*\* Quick and easy logging of daily spending.
+---
 
-# \- \*\*📊 Visual Analytics:\*\* (Coming Soon) Charts and graphs to understand where your honey (money) goes.
+## 🏗 Tech Stack
 
-# \- \*\*📱 Cross-Platform:\*\* Runs smoothly on both iOS and Android.
+| Layer | Technology |
+|-------|------------|
+| Framework | Flutter |
+| Language | Dart |
+| State Management | Provider / Riverpod *(update as needed)* |
+| Local Storage | Hive / SQFLite / SharedPreferences |
+| Architecture | Feature-based structure |
 
-# 
+---
 
-# ---
+## 📂 Project Structure
 
-# 
-
-# \## 🛠️ Tech Stack
-
-# 
-
-# \- \*\*Framework:\*\* \[Flutter](https://flutter.dev/)
-
-# \- \*\*Language:\*\* Dart
-
-# \- \*\*State Management:\*\* (e.g., Provider / Riverpod / Bloc - \*Update this based on what you use\*)
-
-# \- \*\*Local Storage:\*\* (e.g., Hive / Shared Preferences / SQFLite)
-
-# 
-
-# ---
-
-# 
-
-# \## 🚀 Getting Started
-
-# 
-
-# Follow these steps to get a local copy up and running.
-
-# 
-
-# \### Prerequisites
-
-# 
-
-# \*   \[Flutter SDK](https://docs.flutter.dev/get-started/install) installed on your machine.
-
-# \*   An IDE (VS Code or Android Studio).
-
-# 
-
-# \### Installation
-
-# 
-
-# 1\.  \*\*Clone the repository\*\*
-
-# &nbsp;   ```bash
-
-# &nbsp;   git clone https://github.com/your-username/budget-bee.git
-
-# &nbsp;   ```
-
-# 
-
-# 2\.  \*\*Navigate to the project directory\*\*
-
-# &nbsp;   ```bash
-
-# &nbsp;   cd budget-bee
-
-# &nbsp;   ```
-
-# 
-
-# 3\.  \*\*Install dependencies\*\*
-
-# &nbsp;   ```bash
-
-# &nbsp;   flutter pub get
-
-# &nbsp;   ```
-
-# 
-
-# 4\.  \*\*Run the app\*\*
-
-# &nbsp;   ```bash
-
-# &nbsp;   flutter run
-
-# &nbsp;   ```
-
-# 
-
-# ---
-
-# 
-
-# \## 📂 Project Structure
-
-# 
-
-# A quick look at the top-level directory structure:
-
-# 
-
-# ```text
-
-# lib/
-
-# ├── main.dart           # Entry point of the application
-
-# ├── models/             # Data models (Debt, Expense, etc.)
-
-# ├── screens/            # UI Screens
-
-# │   ├── home\_page/      # Main dashboard and navigation
-
-# │   └── tracking/       # Expense input screens
-
-# ├── widgets/            # Reusable UI components
-
-# └── theme/              # App styling and colors
-
+```bash
+lib/
+│
+├── main.dart
+│
+├── core/              # Constants, utilities, themes
+│
+├── models/            # Data models (Expense, Debt, Category)
+│
+├── services/          # Business logic & local storage
+│
+├── features/
+│   ├── home/
+│   ├── expenses/
+│   ├── debts/
+│   └── analytics/
+│
+├── widgets/           # Reusable UI components
+│
+└── theme/             # App styling and dark theme
