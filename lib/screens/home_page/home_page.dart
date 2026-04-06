@@ -77,15 +77,8 @@ class _HomePageState extends State<HomePage> {
                     textAlign: TextAlign.center,
                     style: TextStyle(color: Colors.grey[500], fontSize: 16),
                   ),
-                  Text(
-                    "${widget.userName} 👋",
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+
+
                 ],
               ),
 

@@ -1,24 +1,17 @@
 import 'package:flutter/material.dart';
-// The full path from the 'lib' folder:
-import 'screens/money_tracking/debt_page.dart';
+import 'screens/home_page/log_in.dart';
 
-void main() {
-  runApp(const BudgetBeeApp());
+void main(){
+  runApp(BudgetBeeApp());
 }
 
-class BudgetBeeApp extends StatelessWidget {
-  const BudgetBeeApp({super.key});
+class BudgetBeeApp extends StatelessWidget{
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        brightness: Brightness.dark,
-        scaffoldBackgroundColor: Colors.black,
-      ),
-      // Now Flutter knows exactly where to find DebtPage
-      home: const DebtPage(),
+      debugShowCheckedModeBanner:false,
+      home: log_inPage(),
     );
   }
 }
