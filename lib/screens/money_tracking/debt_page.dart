@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-// 1. The Widget Class
 class DebtPage extends StatefulWidget {
   const DebtPage({super.key});
 
@@ -8,108 +7,138 @@ class DebtPage extends StatefulWidget {
   State<DebtPage> createState() => _DebtPageState();
 }
 
-// 2. The State Class
 class _DebtPageState extends State<DebtPage> {
+  // 1. Memory (The List and Totals)
+  final List<Map<String, dynamic>> _peopleList = [];
+  double _totalDebt = 0;
+  double _totalLent = 0;
+
+  // 2. Typing Controllers
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _amountController = TextEditingController();
+
+  // 3. Simple Add Function
+  void _addEntry(bool isLent) {
+    String name = _nameController.text;
+    double? amount = double.tryParse(_amountController.text);
+
+    if (name.isNotEmpty && amount != null) {
+      setState(() {
+        _peopleList.insert(0, {"name": name, "amount": amount, "isLent": isLent});
+        if (isLent) { _totalLent += amount; } else { _totalDebt += amount; }
+      });
+      _nameController.clear();
+      _amountController.clear();
+    }
+  }
+
+  // 4. Simple Delete Function
+  void _deleteEntry(int index) {
+    setState(() {
+      var person = _peopleList[index];
+      if (person['isLent']) { _totalLent -= person['amount']; }
+      else { _totalDebt -= person['amount']; }
+      _peopleList.removeAt(index);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        title: const Text("Debts & Lending",
-            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
-        backgroundColor: const Color(0xFFFFD700), // Honey Yellow
+        title: const Text("Debts & Lending", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+        backgroundColor: const Color(0xFFFFD700),
         centerTitle: true,
-        elevation: 0,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // --- SUMMARY SECTION ---
+            // Totals Boxes
             Row(
               children: [
-                _buildSummaryBox("TOTAL DEBT", "\$2,500", Colors.redAccent),
-                const SizedBox(width: 15),
-                _buildSummaryBox("TOTAL LENT", "\$1,800", Colors.greenAccent),
+                _buildBox("DEBT", "\$${_totalDebt.toStringAsFixed(0)}", Colors.redAccent),
+                const SizedBox(width: 10),
+                _buildBox("LENT", "\$${_totalLent.toStringAsFixed(0)}", Colors.greenAccent),
               ],
             ),
+            const SizedBox(height: 20),
 
-            const SizedBox(height: 30),
-
-            // --- SIMPLEST INPUT BAR (NO ICONS) ---
-            const Text("ADD ENTRY",
-                style: TextStyle(color: Color(0xFFFFD700), fontSize: 12, fontWeight: FontWeight.bold)),
+            // Input Fields
+            _simpleInput("Name", _nameController, false),
             const SizedBox(height: 10),
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(15),
-              decoration: BoxDecoration(
-                color: const Color(0xFF1A1A1A),
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: const Color(0xFFFFD700), width: 1),
-              ),
-              child: const Text(
-                "Type name and amount here...",
-                style: TextStyle(color: Colors.grey, fontSize: 14),
-              ),
+            _simpleInput("Amount", _amountController, true),
+            const SizedBox(height: 10),
+
+            // Add Buttons
+            Row(
+              children: [
+                _actionBtn("Lent (+)", Colors.greenAccent, () => _addEntry(true)),
+                const SizedBox(width: 10),
+                _actionBtn("Owe (-)", Colors.redAccent, () => _addEntry(false)),
+              ],
             ),
+            const Divider(color: Color(0xFFFFD700), height: 40),
 
-            const SizedBox(height: 30),
-            const Text("LIST",
-                style: TextStyle(color: Color(0xFFFFD700), fontWeight: FontWeight.bold)),
-            const Divider(color: Color(0xFFFFD700), thickness: 0.5),
-
-            // --- LIST OF PEOPLE (CLEAN & SIMPLE) ---
-            _buildPersonTile("Sara", "Owe her \$500", Colors.redAccent),
-            _buildPersonTile("Roza", "Owe her \$200", Colors.redAccent),
-            _buildPersonTile("Tisha", "Lent her \$300", Colors.greenAccent),
-            _buildPersonTile("Mahi", "Owe her \$1,000", Colors.redAccent),
-            _buildPersonTile("Shova", "Lent her \$500", Colors.greenAccent),
-            _buildPersonTile("Faiza", "Owe her \$800", Colors.redAccent),
-            _buildPersonTile("Susmita", "Lent her \$1,000", Colors.greenAccent),
+            // The List
+            Column(
+              children: List.generate(_peopleList.length, (index) {
+                var p = _peopleList[index];
+                return _personRow(index, p['name'], p['amount'], p['isLent']);
+              }),
+            ),
           ],
         ),
       ),
     );
   }
 
-  // Simplest Summary Box Helper
-  Widget _buildSummaryBox(String title, String amount, Color color) {
+  // --- VERY SIMPLE HELPERS ---
+
+  Widget _buildBox(String t, String amt, Color c) {
     return Expanded(
       child: Container(
         padding: const EdgeInsets.all(15),
-        decoration: BoxDecoration(
-          border: Border.all(color: const Color(0xFFFFD700), width: 1),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Column(
-          children: [
-            Text(title, style: const TextStyle(fontSize: 10, color: Colors.grey)),
-            Text(amount, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: color)),
-          ],
-        ),
+        decoration: BoxDecoration(border: Border.all(color: const Color(0xFFFFD700)), borderRadius: BorderRadius.circular(10)),
+        child: Column(children: [Text(t, style: const TextStyle(color: Colors.grey, fontSize: 10)), Text(amt, style: TextStyle(color: c, fontSize: 20, fontWeight: FontWeight.bold))]),
       ),
     );
   }
 
-  // Simplest Person Tile Helper
-  Widget _buildPersonTile(String name, String sub, Color subColor) {
+  Widget _simpleInput(String hint, TextEditingController ctr, bool isNum) {
+    return TextField(
+      controller: ctr,
+      keyboardType: isNum ? TextInputType.number : TextInputType.text,
+      style: const TextStyle(color: Colors.white),
+      decoration: InputDecoration(
+        hintText: hint, hintStyle: const TextStyle(color: Colors.grey),
+        filled: true, fillColor: const Color(0xFF1A1A1A),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+      ),
+    );
+  }
+
+  Widget _actionBtn(String txt, Color c, VoidCallback press) {
+    return Expanded(child: ElevatedButton(onPressed: press, style: ElevatedButton.styleFrom(backgroundColor: c), child: Text(txt, style: const TextStyle(color: Colors.black))));
+  }
+
+  Widget _personRow(int index, String name, double amt, bool isLent) {
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.all(15),
-      decoration: BoxDecoration(
-        color: const Color(0xFF1A1A1A),
-        borderRadius: BorderRadius.circular(10),
-      ),
+      decoration: BoxDecoration(color: const Color(0xFF1A1A1A), borderRadius: BorderRadius.circular(10)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(name, style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold)),
-          Text(sub, style: TextStyle(color: subColor, fontSize: 14)),
+          Text("$name: \$${amt.toStringAsFixed(0)}", style: TextStyle(color: isLent ? Colors.greenAccent : Colors.redAccent, fontWeight: FontWeight.bold)),
+          GestureDetector(
+            onTap: () => _deleteEntry(index),
+            child: const Icon(Icons.close, color: Colors.grey, size: 20),
+          ),
         ],
       ),
     );
   }
 }
-//set
+//final
