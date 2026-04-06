@@ -91,8 +91,9 @@ class _HomePageState extends State<HomePage> {
               Row(
                 children: [
                   _buildMenuBox(Icons.category_outlined, "Categories", Colors.yellow, () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => CategoriesPage()));
-                  }),
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => categories()));
+                  },
+                  ),
                   const SizedBox(width: 15),
                   _buildMenuBox(Icons.pie_chart_outline_rounded, "Analytics", Colors.orangeAccent, () {
                     Navigator.push(context, MaterialPageRoute(builder: (context) => BudgetReportScreen()));
