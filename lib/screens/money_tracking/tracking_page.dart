@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
 
-class TrackingPage extends StatelessWidget {
+// 1. The Widget Class
+class TrackingPage extends StatefulWidget {
   const TrackingPage({super.key});
 
   @override
+  State<TrackingPage> createState() => _TrackingPageState();
+}
+
+// 2. The State Class (This is where the magic happens)
+class _TrackingPageState extends State<TrackingPage> {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black, // Added to keep the theme consistent
       appBar: AppBar(
         title: const Text("Monthly Tracker",
             style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
@@ -21,7 +29,10 @@ class TrackingPage extends StatelessWidget {
                 style: TextStyle(color: Colors.grey, letterSpacing: 1.5)),
             const SizedBox(height: 10),
             const Text("\$5,000.00",
-                style: TextStyle(color: Color(0xFFFFD700), fontSize: 45, fontWeight: FontWeight.bold)),
+                style: TextStyle(
+                    color: Color(0xFFFFD700),
+                    fontSize: 45,
+                    fontWeight: FontWeight.bold)),
 
             const Divider(color: Color(0xFFFFD700), height: 50, thickness: 1),
 
@@ -54,10 +65,14 @@ class TrackingPage extends StatelessWidget {
               child: const Column(
                 children: [
                   Text("REMAINING BALANCE",
-                      style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+                      style: TextStyle(
+                          color: Colors.black, fontWeight: FontWeight.bold)),
                   SizedBox(height: 10),
                   Text("\$1,000.00",
-                      style: TextStyle(color: Colors.black, fontSize: 38, fontWeight: FontWeight.w900)),
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 38,
+                          fontWeight: FontWeight.w900)),
                 ],
               ),
             ),
@@ -79,9 +94,14 @@ class TrackingPage extends StatelessWidget {
         ),
         child: Column(
           children: [
-            Text(label, style: const TextStyle(color: Colors.white70, fontSize: 14)),
+            Text(label,
+                style: const TextStyle(color: Colors.white70, fontSize: 14)),
             const SizedBox(height: 10),
-            Text(value, style: TextStyle(color: textColor, fontSize: 22, fontWeight: FontWeight.bold)),
+            Text(value,
+                style: TextStyle(
+                    color: textColor,
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold)),
           ],
         ),
       ),

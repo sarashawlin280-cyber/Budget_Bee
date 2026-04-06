@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 
-class DebtPage extends StatelessWidget {
+// 1. The Widget Class
+class DebtPage extends StatefulWidget {
   const DebtPage({super.key});
 
+  @override
+  State<DebtPage> createState() => _DebtPageState();
+}
+
+// 2. The State Class
+class _DebtPageState extends State<DebtPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -12,6 +19,7 @@ class DebtPage extends StatelessWidget {
             style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
         backgroundColor: const Color(0xFFFFD700), // Honey Yellow
         centerTitle: true,
+        elevation: 0,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20.0),
@@ -21,69 +29,63 @@ class DebtPage extends StatelessWidget {
             // --- SUMMARY SECTION ---
             Row(
               children: [
-                _buildSummaryBox("Total Debt", "\$2,500", Colors.redAccent),
+                _buildSummaryBox("TOTAL DEBT", "\$2,500", Colors.redAccent),
                 const SizedBox(width: 15),
-                _buildSummaryBox("Total Lent", "\$1,800", Colors.greenAccent),
+                _buildSummaryBox("TOTAL LENT", "\$1,800", Colors.greenAccent),
               ],
             ),
 
-            const SizedBox(height: 25),
+            const SizedBox(height: 30),
 
-            // --- SIMPLE INPUT BAR (DESIGN ONLY - NO BLINKING) ---
-            const Text("ADD NEW ENTRY",
+            // --- SIMPLEST INPUT BAR (NO ICONS) ---
+            const Text("ADD ENTRY",
                 style: TextStyle(color: Color(0xFFFFD700), fontSize: 12, fontWeight: FontWeight.bold)),
             const SizedBox(height: 10),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 12),
+              width: double.infinity,
+              padding: const EdgeInsets.all(15),
               decoration: BoxDecoration(
                 color: const Color(0xFF1A1A1A),
-                borderRadius: BorderRadius.circular(15),
+                borderRadius: BorderRadius.circular(12),
                 border: Border.all(color: const Color(0xFFFFD700), width: 1),
               ),
-              child: const Row(
-                children: [
-                  Icon(Icons.person_add_alt_1, color: Color(0xFFFFD700)),
-                  SizedBox(width: 15),
-                  Text("Enter name and amount...", style: TextStyle(color: Colors.grey, fontSize: 14)),
-                  Spacer(),
-                  Icon(Icons.add_circle, color: Color(0xFFFFD700)),
-                ],
+              child: const Text(
+                "Type name and amount here...",
+                style: TextStyle(color: Colors.grey, fontSize: 14),
               ),
             ),
 
             const SizedBox(height: 30),
-            const Text("PEOPLE LIST",
-                style: TextStyle(color: Color(0xFFFFD700), fontWeight: FontWeight.bold, letterSpacing: 1.2)),
+            const Text("LIST",
+                style: TextStyle(color: Color(0xFFFFD700), fontWeight: FontWeight.bold)),
             const Divider(color: Color(0xFFFFD700), thickness: 0.5),
 
-            // --- LIST OF PEOPLE ---
-            _buildPersonTile("Sara", "Owe her \$500", true),
-            _buildPersonTile("Roza", "Owe her \$200", true),
-            _buildPersonTile("Tisha", "Lent her \$300", false),
-            _buildPersonTile("Mahi", "Owe her \$1,000", true),
-            _buildPersonTile("Shova", "Lent her \$500", false),
-            _buildPersonTile("Faiza", "Owe her \$800", true),
-            _buildPersonTile("Susmita", "Lent her \$1,000", false),
-            _buildPersonTile("Attoja", "Lent her \$200", false),
-            _buildPersonTile("Ankita", "Owe her \$100", true),
+            // --- LIST OF PEOPLE (CLEAN & SIMPLE) ---
+            _buildPersonTile("Sara", "Owe her \$500", Colors.redAccent),
+            _buildPersonTile("Roza", "Owe her \$200", Colors.redAccent),
+            _buildPersonTile("Tisha", "Lent her \$300", Colors.greenAccent),
+            _buildPersonTile("Mahi", "Owe her \$1,000", Colors.redAccent),
+            _buildPersonTile("Shova", "Lent her \$500", Colors.greenAccent),
+            _buildPersonTile("Faiza", "Owe her \$800", Colors.redAccent),
+            _buildPersonTile("Susmita", "Lent her \$1,000", Colors.greenAccent),
           ],
         ),
       ),
     );
   }
 
-  // Helper for Summary Boxes
+  // Simplest Summary Box Helper
   Widget _buildSummaryBox(String title, String amount, Color color) {
     return Expanded(
       child: Container(
         padding: const EdgeInsets.all(15),
         decoration: BoxDecoration(
           border: Border.all(color: const Color(0xFFFFD700), width: 1),
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(10),
         ),
         child: Column(
           children: [
-            Text(title, style: const TextStyle(fontSize: 12, color: Colors.grey)),
+            Text(title, style: const TextStyle(fontSize: 10, color: Colors.grey)),
             Text(amount, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: color)),
           ],
         ),
@@ -91,30 +93,23 @@ class DebtPage extends StatelessWidget {
     );
   }
 
-  // Helper for People Rows
-  Widget _buildPersonTile(String name, String sub, bool isDebt) {
+  // Simplest Person Tile Helper
+  Widget _buildPersonTile(String name, String sub, Color subColor) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 12),
+      margin: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
         color: const Color(0xFF1A1A1A),
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(10),
       ),
-      child: ListTile(
-        leading: CircleAvatar(
-          backgroundColor: const Color(0xFFFFD700),
-          child: Text(name[0], style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
-        ),
-        title: Text(name, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w500)),
-        subtitle: Text(sub, style: TextStyle(color: isDebt ? Colors.redAccent : Colors.greenAccent, fontSize: 13)),
-        trailing: Wrap(
-          spacing: 12,
-          children: [
-            Icon(isDebt ? Icons.arrow_outward : Icons.arrow_downward,
-                color: isDebt ? Colors.redAccent : Colors.greenAccent, size: 18),
-            const Icon(Icons.delete_sweep, color: Colors.grey, size: 20),
-          ],
-        ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(name, style: const TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold)),
+          Text(sub, style: TextStyle(color: subColor, fontSize: 14)),
+        ],
       ),
     );
   }
 }
+//set
