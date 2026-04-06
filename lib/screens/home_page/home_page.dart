@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:budget_bee/screens/catagories/categories.dart';
 import 'package:budget_bee/screens/catagories/budget_report_screen.dart';
@@ -7,7 +6,6 @@ import 'package:budget_bee/screens/money_tracking/debt_page.dart';
 
 class HomePage extends StatefulWidget{
   final String userName;
-
   const HomePage({super.key, required this.userName});
 
   @override
@@ -35,8 +33,6 @@ class _HomePageState extends State<HomePage>{
                       fontSize:22,
                     ),
                   ),
-
-
                 ],
               ),
             ),
@@ -71,7 +67,6 @@ class _HomePageState extends State<HomePage>{
                                 color:Colors.black,
                                 fontSize:20,
                                 fontWeight:FontWeight.bold,
-
                               ),
                             ),
                           ),
@@ -80,20 +75,15 @@ class _HomePageState extends State<HomePage>{
                               style:TextStyle(
                                 color:Colors.black,
                                 fontSize:20,
-
                               ),
                             ),
                           ),
-
                         ],
                       )
-
-
                   ),
                   SizedBox(height:50),
 
                   SizedBox(width:double.infinity,
-
                     child:ElevatedButton(
                       onPressed:(){
                         Navigator.push(
@@ -108,13 +98,11 @@ class _HomePageState extends State<HomePage>{
                           color:Colors.black,
                           fontSize:20,
                           //fontWeight:FontWeight.bold,
-
                         ),
                       ) ,
                     ),
                   ),
                   SizedBox(width:double.infinity,
-
                     child:ElevatedButton(
                       onPressed:(){
                         Navigator.push(
@@ -129,13 +117,11 @@ class _HomePageState extends State<HomePage>{
                           color:Colors.black,
                           fontSize:20,
                           //fontWeight:FontWeight.bold,
-
                         ),
                       ) ,
                     ),
                   ),
                   SizedBox(width:double.infinity,
-
                     child:ElevatedButton(
                       onPressed:(){
                         Navigator.push(
@@ -150,13 +136,11 @@ class _HomePageState extends State<HomePage>{
                           color:Colors.black,
                           fontSize:20,
                           //fontWeight:FontWeight.bold,
-
                         ),
                       ) ,
                     ),
                   ),
                   SizedBox(width:double.infinity,
-
                     child:ElevatedButton(
                       onPressed:(){
                         Navigator.push(
@@ -171,21 +155,12 @@ class _HomePageState extends State<HomePage>{
                           color:Colors.black,
                           fontSize:20,
                           //fontWeight:FontWeight.bold,
-
                         ),
                       ) ,
                     ),
                   ),
-
-
-
-
-
-
-
                 ]
             )
         );
-
   }
 }
