@@ -68,7 +68,7 @@ class _log_inPageState extends State<log_inPage>{
           SizedBox(height:20),
 
           Center(
-            child:Text("Welcome to the page",
+            child:Text("Welcome to our Budget_Bee",
               style:TextStyle(
                 color:Colors.green,
                 fontWeight:FontWeight.bold,
@@ -78,7 +78,7 @@ class _log_inPageState extends State<log_inPage>{
           ),
 
           Center(
-            child:Text("Start with log_in",
+            child:Text("Start managing your money smartly",
               style:TextStyle(
                 color:Colors.black,
                 fontSize:22,
@@ -140,9 +140,10 @@ class _log_inPageState extends State<log_inPage>{
 
           ElevatedButton(
             onPressed: _handleSignUp,
-            child: Text("SignUp",
+            child: Text("SignUp?",
               style: TextStyle(
                 color:Colors.black,
+                fontWeight:FontWeight.bold,
               ),
             ),
           ),
