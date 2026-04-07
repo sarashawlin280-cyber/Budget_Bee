@@ -8,12 +8,12 @@ class DebtPage extends StatefulWidget {
 }
 
 class _DebtPageState extends State<DebtPage> {
-  // 1. Memory (The List and Totals)
+  // 1. Storage: The List and the two separate totals
   final List<Map<String, dynamic>> _peopleList = [];
   double _totalDebt = 0;
   double _totalLent = 0;
 
-  // 2. Typing Controllers
+  // 2. Controllers: To grab text from inputs
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _amountController = TextEditingController();
 
@@ -47,46 +47,69 @@ class _DebtPageState extends State<DebtPage> {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        title: const Text("Debts & Lending", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
-        backgroundColor: const Color(0xFFFFD700),
+        title: const Text("Debt and Lending Tracker", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+        backgroundColor: const Color(0xFFFFD700), // Gold
         centerTitle: true,
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(20.0),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            // Totals Boxes
+            // --- TOTAL BOXES ---
             Row(
               children: [
-                _buildBox("DEBT", "\$${_totalDebt.toStringAsFixed(0)}", Colors.redAccent),
+                Expanded(child: _infoBox("DEBT", _totalDebt, Colors.redAccent)),
                 const SizedBox(width: 10),
-                _buildBox("LENT", "\$${_totalLent.toStringAsFixed(0)}", Colors.greenAccent),
+                Expanded(child: _infoBox("LENT", _totalLent, Colors.greenAccent)),
               ],
             ),
             const SizedBox(height: 20),
 
-            // Input Fields
-            _simpleInput("Name", _nameController, false),
-            const SizedBox(height: 10),
-            _simpleInput("Amount", _amountController, true),
-            const SizedBox(height: 10),
+            // --- INPUT FIELDS ---
+            TextField(
+              controller: _nameController,
+              style: const TextStyle(color: Colors.white),
+              decoration: const InputDecoration(hintText: "Name", hintStyle: TextStyle(color: Colors.grey)),
+            ),
+            TextField(
+              controller: _amountController,
+              style: const TextStyle(color: Colors.white),
+              decoration: const InputDecoration(hintText: "Amount", hintStyle: TextStyle(color: Colors.grey)),
+              keyboardType: TextInputType.number,
+            ),
+            const SizedBox(height: 20),
 
-            // Add Buttons
+            // --- ADD BUTTONS ---
             Row(
               children: [
-                _actionBtn("Lent (+)", Colors.greenAccent, () => _addEntry(true)),
+                Expanded(child: ElevatedButton(onPressed: () => _addEntry(true), style: ElevatedButton.styleFrom(backgroundColor: Colors.greenAccent), child: const Text("Lent (+)", style: TextStyle(color: Colors.black)))),
                 const SizedBox(width: 10),
-                _actionBtn("Owe (-)", Colors.redAccent, () => _addEntry(false)),
+                Expanded(child: ElevatedButton(onPressed: () => _addEntry(false), style: ElevatedButton.styleFrom(backgroundColor: Colors.redAccent), child: const Text("Owe (-)", style: TextStyle(color: Colors.black)))),
               ],
             ),
+
             const Divider(color: Color(0xFFFFD700), height: 40),
 
-            // The List
-            Column(
-              children: List.generate(_peopleList.length, (index) {
-                var p = _peopleList[index];
-                return _personRow(index, p['name'], p['amount'], p['isLent']);
-              }),
+            // --- THE SCROLLABLE LIST ---
+            Expanded(
+              child: ListView.builder(
+                itemCount: _peopleList.length,
+                itemBuilder: (context, index) {
+                  var p = _peopleList[index];
+                  return Card(
+                    color: const Color(0xFF1A1A1A),
+                    child: ListTile(
+                      title: Text(p['name'], style: const TextStyle(color: Colors.white)),
+                      subtitle: Text("\$${p['amount'].toStringAsFixed(0)}",
+                          style: TextStyle(color: p['isLent'] ? Colors.greenAccent : Colors.redAccent, fontWeight: FontWeight.bold)),
+                      trailing: IconButton(
+                        icon: const Icon(Icons.close, color: Colors.grey),
+                        onPressed: () => _deleteEntry(index),
+                      ),
+                    ),
+                  );
+                },
+              ),
             ),
           ],
         ),
@@ -94,51 +117,17 @@ class _DebtPageState extends State<DebtPage> {
     );
   }
 
-  // --- VERY SIMPLE HELPERS ---
-
-  Widget _buildBox(String t, String amt, Color c) {
-    return Expanded(
-      child: Container(
-        padding: const EdgeInsets.all(15),
-        decoration: BoxDecoration(border: Border.all(color: const Color(0xFFFFD700)), borderRadius: BorderRadius.circular(10)),
-        child: Column(children: [Text(t, style: const TextStyle(color: Colors.grey, fontSize: 10)), Text(amt, style: TextStyle(color: c, fontSize: 20, fontWeight: FontWeight.bold))]),
-      ),
-    );
-  }
-
-  Widget _simpleInput(String hint, TextEditingController ctr, bool isNum) {
-    return TextField(
-      controller: ctr,
-      keyboardType: isNum ? TextInputType.number : TextInputType.text,
-      style: const TextStyle(color: Colors.white),
-      decoration: InputDecoration(
-        hintText: hint, hintStyle: const TextStyle(color: Colors.grey),
-        filled: true, fillColor: const Color(0xFF1A1A1A),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-      ),
-    );
-  }
-
-  Widget _actionBtn(String txt, Color c, VoidCallback press) {
-    return Expanded(child: ElevatedButton(onPressed: press, style: ElevatedButton.styleFrom(backgroundColor: c), child: Text(txt, style: const TextStyle(color: Colors.black))));
-  }
-
-  Widget _personRow(int index, String name, double amt, bool isLent) {
+  // Very Simple Helper for the top boxes
+  Widget _infoBox(String title, double value, Color color) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.all(15),
-      decoration: BoxDecoration(color: const Color(0xFF1A1A1A), borderRadius: BorderRadius.circular(10)),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      decoration: BoxDecoration(border: Border.all(color: const Color(0xFFFFD700)), borderRadius: BorderRadius.circular(10)),
+      child: Column(
         children: [
-          Text("$name: \$${amt.toStringAsFixed(0)}", style: TextStyle(color: isLent ? Colors.greenAccent : Colors.redAccent, fontWeight: FontWeight.bold)),
-          GestureDetector(
-            onTap: () => _deleteEntry(index),
-            child: const Icon(Icons.close, color: Colors.grey, size: 20),
-          ),
+          Text(title, style: const TextStyle(color: Colors.grey, fontSize: 12)),
+          Text("\$${value.toStringAsFixed(0)}", style: TextStyle(color: color, fontSize: 20, fontWeight: FontWeight.bold)),
         ],
       ),
     );
   }
 }
-//final
