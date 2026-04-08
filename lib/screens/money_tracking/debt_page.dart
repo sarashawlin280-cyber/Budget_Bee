@@ -57,7 +57,6 @@ class _DebtPageState extends State<DebtPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // Change 1: Added Yellow Background
       backgroundColor: Colors.yellow,
       appBar: AppBar(title: const Text("Debt Tracker")),
       body: Column(
@@ -90,11 +89,9 @@ class _DebtPageState extends State<DebtPage> {
             child: ListView.builder(
               itemCount: _peopleList.length,
               itemBuilder: (context, index) {
-                // Determine the label based on the boolean
                 String status = _peopleList[index]['isLent'] ? "Lent" : "Debt";
 
                 return ListTile(
-                  // Change 2: Showing Lent/Debt status with the Name
                   title: Text("${_peopleList[index]['name']} ($status)"),
                   subtitle: Text(_peopleList[index]['amount'].toString()),
                   trailing: IconButton(
