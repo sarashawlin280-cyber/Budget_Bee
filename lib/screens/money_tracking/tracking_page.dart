@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-// 1. The Widget Class
 class TrackingPage extends StatefulWidget {
   const TrackingPage({super.key});
 
@@ -8,100 +7,65 @@ class TrackingPage extends StatefulWidget {
   State<TrackingPage> createState() => _TrackingPageState();
 }
 
-// 2. The State Class (This is where the magic happens)
 class _TrackingPageState extends State<TrackingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black, // Added to keep the theme consistent
+      backgroundColor: Colors.yellow,
       appBar: AppBar(
-        title: const Text("Monthly Tracker",
-            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
-        backgroundColor: const Color(0xFFFFD700), // Honey Yellow
+        title: const Text("Monthly Tracker"),
+        backgroundColor: Colors.orange,
         centerTitle: true,
       ),
-      body: SingleChildScrollView(
+      body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // --- INCOME HEADER ---
             const Text("TOTAL MONTHLY INCOME",
-                style: TextStyle(color: Colors.grey, letterSpacing: 1.5)),
-            const SizedBox(height: 10),
+                style: TextStyle(fontWeight: FontWeight.bold)),
             const Text("\$5,000.00",
-                style: TextStyle(
-                    color: Color(0xFFFFD700),
-                    fontSize: 45,
-                    fontWeight: FontWeight.bold)),
+                style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold)),
 
-            const Divider(color: Color(0xFFFFD700), height: 50, thickness: 1),
+            const SizedBox(height: 20),
+            const Divider(color: Colors.black),
+            const SizedBox(height: 20),
 
-            // --- EXPENSES & SAVINGS ROW ---
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                _buildStatCard("Expenses", "\$2,800", Colors.redAccent),
-                const SizedBox(width: 15),
-                _buildStatCard("Savings", "\$1,200", Colors.blueAccent),
+                Column(
+                  children: [
+                    const Text("Expenses"),
+                    const Text("\$2,800",
+                        style: TextStyle(fontSize: 20, color: Colors.red, fontWeight: FontWeight.bold)),
+                  ],
+                ),
+                Column(
+                  children: [
+                    const Text("Savings"),
+                    const Text("\$1,200",
+                        style: TextStyle(fontSize: 20, color: Colors.blue, fontWeight: FontWeight.bold)),
+                  ],
+                ),
               ],
             ),
 
-            const SizedBox(height: 30),
+            const SizedBox(height: 40),
 
-            // --- REMAINING BALANCE SECTION ---
             Container(
+              padding: const EdgeInsets.all(20),
+              color: Colors.white,
               width: double.infinity,
-              padding: const EdgeInsets.all(30),
-              decoration: BoxDecoration(
-                color: const Color(0xFFFFD700),
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: [
-                  BoxShadow(
-                    color: const Color(0xFFFFD700).withOpacity(0.3),
-                    blurRadius: 10,
-                    offset: const Offset(0, 5),
-                  )
-                ],
-              ),
-              child: const Column(
+              child: Column(
                 children: [
-                  Text("REMAINING BALANCE",
-                      style: TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.bold)),
-                  SizedBox(height: 10),
-                  Text("\$1,000.00",
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 38,
-                          fontWeight: FontWeight.w900)),
+                  const Text("REMAINING BALANCE",
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  const Text("\$1,000.00",
+                      style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
                 ],
               ),
             ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  // REUSABLE UI COMPONENT: The Stat Card
-  Widget _buildStatCard(String label, String value, Color textColor) {
-    return Expanded(
-      child: Container(
-        padding: const EdgeInsets.all(20),
-        decoration: BoxDecoration(
-          color: const Color(0xFF1A1A1A), // Dark Grey Card
-          borderRadius: BorderRadius.circular(15),
-          border: Border.all(color: const Color(0xFFFFD700), width: 0.5),
-        ),
-        child: Column(
-          children: [
-            Text(label,
-                style: const TextStyle(color: Colors.white70, fontSize: 14)),
-            const SizedBox(height: 10),
-            Text(value,
-                style: TextStyle(
-                    color: textColor,
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold)),
           ],
         ),
       ),
