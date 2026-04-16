@@ -1,7 +1,11 @@
+import 'package:budget_bee/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart'; // Add this
 import 'firebase_options.dart'; // Add this
-import 'screens/home_page/log_in.dart';
+//import 'screens/home_page/log_in.dart';
+import 'splash_screen.dart';
+import 'package:budget_bee/screens/home_page/log_in.dart';
+
 
 void main() async {
   // 1. Initialize Flutter bindings
@@ -20,7 +24,7 @@ class BudgetBeeApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: log_inPage(), // Keep your existing home
+    home:const splash_screen(),
     );
   }
 }

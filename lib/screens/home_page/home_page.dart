@@ -33,29 +33,66 @@ class _HomePageState extends State<HomePage>{
                       fontSize:22,
                     ),
                   ),
+
+
                 ],
               ),
+
+
+
+
+
             ),
+
+        endDrawer: Drawer(
+
+          child: Container(
+            color: Colors.white,
+            child: Column(
+              children: [
+                const SizedBox(height: 60),
+
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: Colors.grey.shade300),
+
+                    ),
+                    child: ListTile(
+                      leading: const Icon(Icons.logout, color: Colors.red),
+                      title: const Text(
+                        'Logout',
+                        style: TextStyle(
+                          color: Colors.red,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
+                      ),
+                      onTap: () {
+                        Navigator.pop(context);
+                        print("User Logged Out");
+                      },
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
 
             body:Column(
                 mainAxisAlignment:MainAxisAlignment.start,
                 crossAxisAlignment:CrossAxisAlignment.center,
                 children: [
-                  Center(
-                    child:Text("Welcome to Tisha",
-                      style:TextStyle(
-                        color:Colors.white,
-                        fontSize:20,
-                        fontWeight:FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height:10),
+
                   Container(
                       width:double.infinity,
                       padding:EdgeInsets.all(5.0),
                       decoration:BoxDecoration(
-                        color:Colors.white,
+                        color:Colors.yellow,
                         border:Border.all(color:Colors.black,width:0.5),
                         borderRadius:BorderRadius.circular(5),
                       ),
@@ -85,6 +122,9 @@ class _HomePageState extends State<HomePage>{
 
                   SizedBox(width:double.infinity,
                     child:ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.yellow,
+                      ),
                       onPressed:(){
                         Navigator.push(
                           context,
@@ -93,7 +133,7 @@ class _HomePageState extends State<HomePage>{
                           ),
                         );
                       },
-                      child:Text("categories",
+                      child:Text("Categories",
                         style:TextStyle(
                           color:Colors.black,
                           fontSize:20,
@@ -104,6 +144,10 @@ class _HomePageState extends State<HomePage>{
                   ),
                   SizedBox(width:double.infinity,
                     child:ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.yellow,
+                      ),
+
                       onPressed:(){
                         Navigator.push(
                           context,
@@ -123,6 +167,9 @@ class _HomePageState extends State<HomePage>{
                   ),
                   SizedBox(width:double.infinity,
                     child:ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.yellow,
+                      ),
                       onPressed:(){
                         Navigator.push(
                           context,
@@ -142,6 +189,9 @@ class _HomePageState extends State<HomePage>{
                   ),
                   SizedBox(width:double.infinity,
                     child:ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.yellow,
+                      ),
                       onPressed:(){
                         Navigator.push(
                           context,
